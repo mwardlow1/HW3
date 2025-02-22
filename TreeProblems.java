@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** Michael Wardlow / 001 ***
  *
  * This java file contains several simple tree problems that need to be
  * codified. These routines  must use the TreeMap and TreeSet library
@@ -27,7 +27,18 @@ public class TreeProblems {
     // *several* lines of code. Hint: create two temporary TreeSets and utilize the
     // methods retainAll(), addAll(), and removeAll(). But in the end, get something to work.
 
-    return setA;
+
+    // Create two temporary TreeSets to copy what's in the original sets
+    TreeSet<Integer> tempSetA = new TreeSet<>(setA);
+    TreeSet<Integer> tempSetB = new TreeSet<>(setB);
+
+    tempSetA.addAll(tempSetB);        // Combine the elements of setA and setB using tempSetA
+
+    tempSetB.retainAll(setA);     // tempSetB now retains all the elements that are common between setA and setB
+
+    tempSetA.removeAll(tempSetB);     // tempSetA, having all the elements, now removes all of the common elements between setA and setB, which are in tempSetB
+
+    return tempSetA;    // Returns the temporary TreeSet that contains all elements that are not in both sets
   }
 
 
@@ -41,8 +52,14 @@ public class TreeProblems {
   public static void removeEven(Map<Integer, String> treeMap) {
 
     // INSERT CODE HERE.
+    Iterator<Integer> iterator = treeMap.keySet().iterator();   // Iterator to get to te keys in the map
 
-    return;
+    while (iterator.hasNext()) {        // Loop going to every key in the map
+      Integer key = iterator.next();    // Go to the next Key
+      if (key % 2 == 0) {           // check if the key is even
+        iterator.remove();        // remove the current key value pair from the Map when it is even
+      }
+    }
   }
 
 
@@ -57,7 +74,11 @@ public class TreeProblems {
 
     // INSERT CODE HERE
 
-    return false;
+    if (tree1.equals(tree2)) {         // using .equals() to see if both trees are equal to each other
+      return true;              // returns true (boolean value) if the trees are equal
+    } else {
+      return false;             // returns false if the trees are not equal
+    }
 
   }
 
